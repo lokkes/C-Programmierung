@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/lokkeshwaran/Downloads/UNI/SEM1/PROG1/C-Programmierung",
+      "program": "/Users/lokkeshwaran/Downloads/UNI/SEM1/PROG1/C-Programmierung/build/Debug/outDebug"
+    }
+  ]
+}
