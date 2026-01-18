@@ -9,10 +9,10 @@ void displayStudent(tStud *s){
         printf("%d\n",s->noteBel);
 }
 
-tStud* getStudent(){
+/* tStud* getStudent(){
 
 
-}
+} */
 
 //  this function writes only one student (tStud) entry to the file per call.
 // If you want to write multiple students, you need to call this function in a loop for each student,
