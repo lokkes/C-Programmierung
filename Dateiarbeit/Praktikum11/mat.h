@@ -4,3 +4,5 @@ typedef struct
   char vNr  [12+1];
   long Lbst;
 }tArt;
+
+void swap(tArt*x, tArt*y);
