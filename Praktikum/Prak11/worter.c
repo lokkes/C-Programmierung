@@ -4,8 +4,7 @@
 
 
 char buf[128];
-int arr[10]={0};
-void increment(int x);
+int arr[11]={0};
 
 int main(int argc, char*argv[]){
 
@@ -17,38 +16,42 @@ int main(int argc, char*argv[]){
     }
 
     FILE* fp = fopen(argv[1],"r");
+    if(fp == NULL){
+
+        printf("File failed to open");
+        return 1;
+
+    }
 
     //fgets returns the buffer pointer on success
     //It returns NULL on end-of-file or error
 
     while(fgets(buf,sizeof(buf),fp) != NULL){
 
-        char* token = strtok(buf, " ");  
+        char* token = strtok(buf," \t\r\n");  
       
         while (token != NULL) {
             
             int len = strlen(token);
 
-            if((len > 0) && (len <= 10)){
-                increment(len);
+            if (len >= 1 && len <= 10) {
+                arr[len]++;
+            } else {
+                arr[0]++;   // sonstige Wörter (>10)
             }
-
-            else{
-               /*  printf("11 : sonstiger wörter"); */
-            }
-             token = strtok(NULL, " ");
+             token = strtok(NULL, " \t\r\n");
         }   
 
     }
 
     for(int i = 1; i<=10; i++){
-        printf(" %d : %d\n", i, arr[i]);
+
+        printf(" %d : %d\n", i, arr[i]);  
+        
     }
-    
+    printf(" 11 : %d sonstiges",arr[0]);
+
+   fclose(fp);
     return 0;
 }
 
-void increment(int x){
-    arr[x]++;
-    
-}
