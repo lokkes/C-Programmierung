@@ -1,14 +1,21 @@
-typedef struct{
+#ifndef PERS_H
+#define PERS_H
 
-    char * name;
-    char * surname;
-    char * phone;
+#include <stdio.h>
 
-}tpers;
+typedef struct {
+    char *name;
+    char *surname;
+    char *phone;
+} tpers;
 
-
-char* readStr(FILE* fp);
-void  putStr(char* str);
+char*  readStr(FILE* fp);
+void   putStr(char* str);
 
 tpers* readPers(FILE* fp);
-void putPers(tpers* p);
+void   putPers(tpers* p);
+
+void   freePers(tpers* p);
+void   bubblesort(tpers **arr, int n);
+
+#endif

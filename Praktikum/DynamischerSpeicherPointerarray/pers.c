@@ -4,112 +4,90 @@
 #include "pers.h"
 
 
-
-int main(){
-
-    FILE* fp= fopen("phone.dat","rb");
-    tpers* ptr;
-    tpers ** pAll=NULL;
-    pAll = malloc(sizeof(tpers*));
-    int n = 0;
-
-        while((ptr = readPers(fp)) != NULL){
-
-            pAll=realloc(pAll,sizeof(tpers*)*(n+1));
-            pAll[n]=ptr;
-            n++;    
-            
-            putPers(ptr);
-
-            //free all the pointers 
-            free(ptr->name);
-            free(ptr->surname);
-            free(ptr->phone);
-            free(ptr);
-        }
-
-    fclose(fp);  
-    free(pAll); 
-    return 0;
-}
-
-tpers* readPers(FILE* fp){
-
-    tpers* ptr;
-
-   ptr = malloc(sizeof(tpers));
-   if(ptr == NULL){
-    free(ptr);
-    return NULL;
-   } 
-
-   ptr->name=readStr(fp);
-   if(ptr->name == NULL){
-
-        free(ptr);
-        return NULL;
-   } 
-
-   ptr->surname=readStr(fp);
-   if(ptr->surname == NULL){
-        free(ptr->name);
-        free(ptr);
-        return NULL;
-   } 
-
-   ptr->phone=readStr(fp);
-
-   if(ptr->phone == NULL){
-        free(ptr->name);
-        free(ptr->surname);
-        free(ptr);
-        return NULL;
-
-   } 
-
-   
-   return ptr; 
-   
-}
-
-char* readStr(FILE* fp){
-
+/* ---------- read one string ---------- */
+char* readStr(FILE* fp)
+{
     unsigned char len;
-    char *ptr;
 
-    if(fread(&len,1,sizeof(len),fp)==1){
-        ptr = malloc(len+1);
-        if(ptr == NULL) return NULL;
-    }
+    if (fread(&len, 1, 1, fp) != 1)
+        return NULL;
 
-    else{
+    char *s = malloc(len + 1);
+    if (!s) return NULL;
 
+    if (fread(s, 1, len, fp) != len) {
+        free(s);
         return NULL;
     }
-   
-   if(fread(ptr,len,1,fp)== 1){
 
-           ptr[len] = '\0';
-           return ptr;
-    }
+    s[len] = '\0';
+    return s;
+}
 
-    else{
 
-        free(ptr);
+/* ---------- read one person ---------- */
+tpers* readPers(FILE* fp)
+{
+    tpers *p = malloc(sizeof(tpers));
+    if (!p) return NULL;
+
+    p->name    = readStr(fp);
+    if (!p->name) { free(p); return NULL; }
+
+    p->surname = readStr(fp);
+    if (!p->surname) { free(p->name); free(p); return NULL; }
+
+    p->phone   = readStr(fp);
+    if (!p->phone) {
+        free(p->name);
+        free(p->surname);
+        free(p);
         return NULL;
     }
- 
 
+    return p;
 }
 
-void putStr(char* str){
-    printf("%s\n",str);
+
+/* ---------- printing ---------- */
+void putStr(char* s)
+{
+    printf("%s\n", s);
 }
 
-void putPers(tpers* p){
+void putPers(tpers* p)
+{
+    putStr(p->name);
+    putStr(p->surname);
+    putStr(p->phone);
+    printf("\n");
+}
 
-        putStr(p->name);
-        putStr(p->surname);
-        putStr(p->phone);
 
+/* ---------- free one person ---------- */
+void freePers(tpers* p)
+{
+    if (!p) return;
+
+    free(p->name);
+    free(p->surname);
+    free(p->phone);
+    free(p);
+}
+
+
+/* ---------- bubble sort (swap pointers only) ---------- */
+void bubblesort(tpers **arr, int n)
+{
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-1-i; j++) {
+
+            if (strcmp(arr[j]->name, arr[j+1]->name) > 0) {
+
+                tpers *tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+            }
+        }
+    }
 }

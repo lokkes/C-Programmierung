@@ -1,65 +1,50 @@
-// reading the file manually to understand how reaing works 
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "pers.h"
 
-char buf[128];
-
-int main(){
-
-    tpers* ptr;
-    unsigned char len; 
-      
-    FILE* fp = fopen("phone.dat","rb");
-    
-    ptr= malloc(sizeof(tpers)); 
-
-    int i=0,j=1;
-    while(fread(&len,sizeof(len),1,fp)==1){
-   
-    j++;
-
-    ptr[i].name=malloc(len+1);
-    fread(ptr[i].name,len,1,fp);
-    ptr[i].name[len] = '\0';
-    printf("%s",ptr[i].name);
-    
-
-
-    fread(&len,sizeof(len),1,fp);
-
-    ptr[i].surname=malloc(len+1);
-    fread(ptr[i].surname,len,1,fp);
-    ptr[i].surname[len] = '\0';
-    printf("%s\t",ptr[i].surname);
-    
-
-
-    fread(&len,sizeof(len),1,fp);
-
-    ptr[i].phone=malloc(len+1);
-    fread(ptr[i].phone,len,1,fp);
-    ptr[i].phone[len] = '\0';
-    printf("%s\n",ptr[i].phone);
-   
-
-
-    i++;
-    
-
-    ptr= realloc(ptr,sizeof(tpers)*j);
-
+int main(void)
+{
+    FILE *fp = fopen("phone.dat", "rb");
+    if (!fp) {
+        perror("phone.dat");
+        return 1;
     }
 
-    free(ptr);
+    tpers **pAll = NULL;
+    int n = 0;
 
+    tpers *p;
+
+    /* -------- read all persons -------- */
+    while ((p = readPers(fp)) != NULL) {
+
+        tpers **tmp = realloc(pAll, (n+1) * sizeof(tpers*));
+        if (!tmp) {
+            freePers(p);
+            break;
+        }
+
+        pAll = tmp;
+        pAll[n++] = p;
+    }
+
+    fclose(fp);
+
+
+    /* -------- sort (Aufgabe 3) -------- */
+    bubblesort(pAll, n);
+
+
+    /* -------- print all -------- */
+    for (int i = 0; i < n; i++)
+        putPers(pAll[i]);
+
+
+    /* -------- free memory -------- */
+    for (int i = 0; i < n; i++)
+        freePers(pAll[i]);
+
+    free(pAll);
 
     return 0;
-
-
 }
-
-
-
