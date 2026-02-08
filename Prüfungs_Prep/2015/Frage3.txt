@@ -1,0 +1,22 @@
+paareAufgabe 3
+
+Programmieren Sie eine Funktion, die in einem durch die Funktion bereitgestellten Speicherbereich n Wertepaare x, y = f(x) speichert und den Pointer auf diesen Speicherbereich zurückgibt.
+
+Die Funktion erhält als Parameter den ersten x-Wert, die Schrittweite, die Anzahl der zu berechnenden Funktionswerte und die Funktion f(x).
+
+Die Funktion f(x) erhält ein Argument des Typs double und erzeugt einen Rückgabewert vom Typ double
+(beispielsweise: double square(double x) { return x*x; }).
+
+Programmieren Sie eine main-Funktion zum Test, ohne Argumente, die Ihre Funktion aufruft, die berechneten Werte ausgibt und den Speicher anschließend wieder freigibt
+
+x: 0.000  y=f(x): 0.000
+x: 1.000  y=f(x): 1.000
+x: 2.000  y=f(x): 4.000
+x: 3.000  y=f(x): 9.000
+x: 4.000  y=f(x): 16.000
+x: 5.000  y=f(x): 25.000
+x: 6.000  y=f(x): 36.000
+x: 7.000  y=f(x): 49.000
+x: 8.000  y=f(x): 64.000
+x: 9.000  y=f(x): 81.000
+.
