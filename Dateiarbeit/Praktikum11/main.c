@@ -1,9 +1,6 @@
-//sorting has to be done to finish this aufgabe 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "mat.h"
 
 void swap(tArt *x, tArt *y);
@@ -32,10 +29,10 @@ int main(int argc, char *argv[]){
     long filesize = ftell(fp); // ftell gives the size of the file 
     fseek(fp,0,SEEK_SET);
 
-    //struct*x = totalfilesize
-
+    //to find the size of each struct & allocate memory
     long records = filesize/sizeof(tArt);
 
+    // allocates space for all the structs part[1]...
     part = malloc(records*sizeof(tArt));
 
     if(part == NULL){

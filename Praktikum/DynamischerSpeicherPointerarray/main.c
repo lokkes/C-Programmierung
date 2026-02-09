@@ -12,7 +12,7 @@ int main(void)
 
     tpers **pAll = NULL;
     int n = 0;
-
+    
     tpers *p;
 
     /* -------- read all persons -------- */

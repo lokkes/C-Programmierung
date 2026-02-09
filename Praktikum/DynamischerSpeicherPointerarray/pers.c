@@ -31,13 +31,13 @@ tpers* readPers(FILE* fp)
     tpers *p = malloc(sizeof(tpers));
     if (!p) return NULL;
 
-    p->name    = readStr(fp);
+    p->name = readStr(fp);
     if (!p->name) { free(p); return NULL; }
 
     p->surname = readStr(fp);
     if (!p->surname) { free(p->name); free(p); return NULL; }
 
-    p->phone   = readStr(fp);
+    p->phone  = readStr(fp);
     if (!p->phone) {
         free(p->name);
         free(p->surname);

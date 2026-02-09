@@ -40,7 +40,7 @@ int main(/* int argc, char*argv[] */){
         printf("quiting......");
         DeleteList(inputptr); 
 
-
+        
     }
 
     else{

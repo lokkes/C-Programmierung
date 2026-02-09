@@ -142,7 +142,7 @@ void mysort(void *base, size_t nmemb, size_t size, int (*compar)(const void *, c
             if(compar(p1,p2) > 0){
                 //swap the results 
                 char tmp[size];
-                memcpy(tmp,p1,size);
+                memcpy(tmp,p1,size);//memcpy(destination,source,bytes)
                 memcpy(p1,p2,size);
                 memcpy(p2,tmp,size);
 

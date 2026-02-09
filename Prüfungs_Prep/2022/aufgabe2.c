@@ -6,7 +6,7 @@ int main(int argc, char* argv[]){
 	
   if(argc != 3){
 	
-     fprintf(stderr"Enter : ./progname  x and n");
+     fprintf(stderr,"Enter : ./progname  x and n");
      return -1;	
 
   }
@@ -16,14 +16,14 @@ int main(int argc, char* argv[]){
   double calc = 0.0;
   double result = 1;
 
-  for(int k = 0; k=<n; k++){
+  for(int k = 0; k<n; k++){
 	 
-	cacl += result/factorial(k);	
+	cacl = result/factorial(k);	
 	result *=x;
   }
 
   printf("output : \n");
-  printf("%lf %d --> %lf",x,n,cal);
+  printf("%lf %d --> %lf",x,n,calc);
 
   return 0;
 
